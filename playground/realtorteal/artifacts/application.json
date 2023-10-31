@@ -1,0 +1,206 @@
+{
+    "hints": {
+        "createFundsInfo(pay,string,address,uint64,uint64,bool,uint64)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "readItem(string)(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool)": {
+            "structs": {
+                "output": {
+                    "name": "SenderFundsContract",
+                    "elements": [
+                        [
+                            "propertyNumber",
+                            "string"
+                        ],
+                        [
+                            "Sender",
+                            "address"
+                        ],
+                        [
+                            "Receiver",
+                            "address"
+                        ],
+                        [
+                            "bonusAmount",
+                            "uint64"
+                        ],
+                        [
+                            "startDate",
+                            "uint64"
+                        ],
+                        [
+                            "endDate",
+                            "uint64"
+                        ],
+                        [
+                            "propertySold",
+                            "bool"
+                        ],
+                        [
+                            "haveExpectedSalesPrice",
+                            "bool"
+                        ],
+                        [
+                            "expectedSalesPrice",
+                            "uint64"
+                        ],
+                        [
+                            "meetSalesPrice",
+                            "bool"
+                        ]
+                    ]
+                }
+            },
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "WithdrawFunds(string)(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool)": {
+            "structs": {
+                "output": {
+                    "name": "SenderFundsContract",
+                    "elements": [
+                        [
+                            "propertyNumber",
+                            "string"
+                        ],
+                        [
+                            "Sender",
+                            "address"
+                        ],
+                        [
+                            "Receiver",
+                            "address"
+                        ],
+                        [
+                            "bonusAmount",
+                            "uint64"
+                        ],
+                        [
+                            "startDate",
+                            "uint64"
+                        ],
+                        [
+                            "endDate",
+                            "uint64"
+                        ],
+                        [
+                            "propertySold",
+                            "bool"
+                        ],
+                        [
+                            "haveExpectedSalesPrice",
+                            "bool"
+                        ],
+                        [
+                            "expectedSalesPrice",
+                            "uint64"
+                        ],
+                        [
+                            "meetSalesPrice",
+                            "bool"
+                        ]
+                    ]
+                }
+            },
+            "call_config": {
+                "no_op": "CALL"
+            }
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDAgMQpieXRlY2Jsb2NrIDB4IDB4MDAgMHgxNTFmN2M3NQp0eG4gTnVtQXBwQXJncwppbnRjXzAgLy8gMAo9PQpibnogbWFpbl9sOAp0eG5hIEFwcGxpY2F0aW9uQXJncyAwCnB1c2hieXRlcyAweGJiNWU0OTgxIC8vICJjcmVhdGVGdW5kc0luZm8ocGF5LHN0cmluZyxhZGRyZXNzLHVpbnQ2NCx1aW50NjQsYm9vbCx1aW50NjQpdm9pZCIKPT0KYm56IG1haW5fbDcKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMApwdXNoYnl0ZXMgMHg3ODIzOTg5NyAvLyAicmVhZEl0ZW0oc3RyaW5nKShzdHJpbmcsYWRkcmVzcyxhZGRyZXNzLHVpbnQ2NCx1aW50NjQsdWludDY0LGJvb2wsYm9vbCx1aW50NjQsYm9vbCkiCj09CmJueiBtYWluX2w2CnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4MWIyYWRiYjIgLy8gIldpdGhkcmF3RnVuZHMoc3RyaW5nKShzdHJpbmcsYWRkcmVzcyxhZGRyZXNzLHVpbnQ2NCx1aW50NjQsdWludDY0LGJvb2wsYm9vbCx1aW50NjQsYm9vbCkiCj09CmJueiBtYWluX2w1CmVycgptYWluX2w1Ogp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBOb09wCj09CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCiE9CiYmCmFzc2VydApjYWxsc3ViIFdpdGhkcmF3RnVuZHNjYXN0ZXJfNQppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sNjoKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQp0eG4gQXBwbGljYXRpb25JRAppbnRjXzAgLy8gMAohPQomJgphc3NlcnQKY2FsbHN1YiByZWFkSXRlbWNhc3Rlcl80CmludGNfMSAvLyAxCnJldHVybgptYWluX2w3Ogp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBOb09wCj09CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCiE9CiYmCmFzc2VydApjYWxsc3ViIGNyZWF0ZUZ1bmRzSW5mb2Nhc3Rlcl8zCmludGNfMSAvLyAxCnJldHVybgptYWluX2w4Ogp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBOb09wCj09CmJueiBtYWluX2wxMAplcnIKbWFpbl9sMTA6CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCj09CmFzc2VydAppbnRjXzEgLy8gMQpyZXR1cm4KCi8vIGNyZWF0ZUZ1bmRzSW5mbwpjcmVhdGVGdW5kc0luZm9fMDoKcHJvdG8gNyAwCmludGNfMCAvLyAwCmR1cApieXRlY18wIC8vICIiCmludGNfMCAvLyAwCmJ5dGVjXzAgLy8gIiIKaW50Y18wIC8vIDAKZHVwCmJ5dGVjXzAgLy8gIiIKZHVwCmludGNfMCAvLyAwCiEKIQpmcmFtZV9idXJ5IDAKaW50Y18wIC8vIDAKIQohCmZyYW1lX2J1cnkgMQp0eG4gU2VuZGVyCmZyYW1lX2J1cnkgMgpmcmFtZV9kaWcgMgpsZW4KcHVzaGludCAzMiAvLyAzMgo9PQphc3NlcnQKZnJhbWVfZGlnIC03Cmd0eG5zIEFtb3VudApmcmFtZV9idXJ5IDMKZnJhbWVfZGlnIC02CmZyYW1lX2J1cnkgOApmcmFtZV9kaWcgOApmcmFtZV9idXJ5IDcKcHVzaGludCAxMDAgLy8gMTAwCmZyYW1lX2J1cnkgNQpmcmFtZV9kaWcgNQppdG9iCmV4dHJhY3QgNiAwCmZyYW1lX2RpZyAyCmNvbmNhdApmcmFtZV9kaWcgLTUKY29uY2F0CmZyYW1lX2RpZyAzCml0b2IKY29uY2F0CmZyYW1lX2RpZyAtNAppdG9iCmNvbmNhdApmcmFtZV9kaWcgLTMKaXRvYgpjb25jYXQKYnl0ZWNfMSAvLyAweDAwCmludGNfMCAvLyAwCmZyYW1lX2RpZyAwCnNldGJpdAppbnRjXzEgLy8gMQpmcmFtZV9kaWcgLTIKc2V0Yml0CmNvbmNhdApmcmFtZV9kaWcgLTEKaXRvYgpjb25jYXQKYnl0ZWNfMSAvLyAweDAwCmludGNfMCAvLyAwCmZyYW1lX2RpZyAxCnNldGJpdApjb25jYXQKZnJhbWVfZGlnIDcKY29uY2F0CmZyYW1lX2J1cnkgNApmcmFtZV9kaWcgLTYKZXh0cmFjdCAyIDAKYm94X2RlbApwb3AKZnJhbWVfZGlnIC02CmV4dHJhY3QgMiAwCmZyYW1lX2RpZyA0CmJveF9wdXQKcmV0c3ViCgovLyByZWFkSXRlbQpyZWFkSXRlbV8xOgpwcm90byAxIDEKYnl0ZWNfMCAvLyAiIgpmcmFtZV9kaWcgLTEKZXh0cmFjdCAyIDAKYm94X2dldApzdG9yZSAxCnN0b3JlIDAKbG9hZCAxCmFzc2VydApsb2FkIDAKZnJhbWVfYnVyeSAwCnJldHN1YgoKLy8gV2l0aGRyYXdGdW5kcwpXaXRoZHJhd0Z1bmRzXzI6CnByb3RvIDEgMQpieXRlY18wIC8vICIiCmR1cAppbnRjXzAgLy8gMApieXRlY18wIC8vICIiCmZyYW1lX2RpZyAtMQpleHRyYWN0IDIgMApib3hfZ2V0CnN0b3JlIDMKc3RvcmUgMgpsb2FkIDMKYXNzZXJ0CmxvYWQgMgpmcmFtZV9idXJ5IDEKZnJhbWVfZGlnIDEKcHVzaGludCA2NiAvLyA2NgpleHRyYWN0X3VpbnQ2NApmcmFtZV9idXJ5IDIKZnJhbWVfZGlnIDEKZXh0cmFjdCAzNCAzMgpmcmFtZV9idXJ5IDMKZnJhbWVfZGlnIDMKdHhuIFNlbmRlcgo9PQphc3NlcnQKaXR4bl9iZWdpbgppbnRjXzEgLy8gcGF5Cml0eG5fZmllbGQgVHlwZUVudW0KdHhuIFNlbmRlcgppdHhuX2ZpZWxkIFJlY2VpdmVyCmZyYW1lX2RpZyAyCml0eG5fZmllbGQgQW1vdW50Cml0eG5fc3VibWl0CmZyYW1lX2RpZyAtMQpleHRyYWN0IDIgMApib3hfZ2V0CnN0b3JlIDUKc3RvcmUgNApsb2FkIDUKYXNzZXJ0CmxvYWQgNApmcmFtZV9idXJ5IDAKcmV0c3ViCgovLyBjcmVhdGVGdW5kc0luZm9fY2FzdGVyCmNyZWF0ZUZ1bmRzSW5mb2Nhc3Rlcl8zOgpwcm90byAwIDAKaW50Y18wIC8vIDAKYnl0ZWNfMCAvLyAiIgpkdXAKaW50Y18wIC8vIDAKZHVwbiAzCnR4bmEgQXBwbGljYXRpb25BcmdzIDEKZnJhbWVfYnVyeSAxCnR4bmEgQXBwbGljYXRpb25BcmdzIDIKZnJhbWVfYnVyeSAyCnR4bmEgQXBwbGljYXRpb25BcmdzIDMKYnRvaQpmcmFtZV9idXJ5IDMKdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNApidG9pCmZyYW1lX2J1cnkgNAp0eG5hIEFwcGxpY2F0aW9uQXJncyA1CmludGNfMCAvLyAwCnB1c2hpbnQgOCAvLyA4CioKZ2V0Yml0CmZyYW1lX2J1cnkgNQp0eG5hIEFwcGxpY2F0aW9uQXJncyA2CmJ0b2kKZnJhbWVfYnVyeSA2CnR4biBHcm91cEluZGV4CmludGNfMSAvLyAxCi0KZnJhbWVfYnVyeSAwCmZyYW1lX2RpZyAwCmd0eG5zIFR5cGVFbnVtCmludGNfMSAvLyBwYXkKPT0KYXNzZXJ0CmZyYW1lX2RpZyAwCmZyYW1lX2RpZyAxCmZyYW1lX2RpZyAyCmZyYW1lX2RpZyAzCmZyYW1lX2RpZyA0CmZyYW1lX2RpZyA1CmZyYW1lX2RpZyA2CmNhbGxzdWIgY3JlYXRlRnVuZHNJbmZvXzAKcmV0c3ViCgovLyByZWFkSXRlbV9jYXN0ZXIKcmVhZEl0ZW1jYXN0ZXJfNDoKcHJvdG8gMCAwCmJ5dGVjXzAgLy8gIiIKZHVwCnR4bmEgQXBwbGljYXRpb25BcmdzIDEKZnJhbWVfYnVyeSAxCmZyYW1lX2RpZyAxCmNhbGxzdWIgcmVhZEl0ZW1fMQpmcmFtZV9idXJ5IDAKYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CmZyYW1lX2RpZyAwCmNvbmNhdApsb2cKcmV0c3ViCgovLyBXaXRoZHJhd0Z1bmRzX2Nhc3RlcgpXaXRoZHJhd0Z1bmRzY2FzdGVyXzU6CnByb3RvIDAgMApieXRlY18wIC8vICIiCmR1cAp0eG5hIEFwcGxpY2F0aW9uQXJncyAxCmZyYW1lX2J1cnkgMQpmcmFtZV9kaWcgMQpjYWxsc3ViIFdpdGhkcmF3RnVuZHNfMgpmcmFtZV9idXJ5IDAKYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CmZyYW1lX2RpZyAwCmNvbmNhdApsb2cKcmV0c3Vi",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDgKcHVzaGludCAwIC8vIDAKcmV0dXJu"
+    },
+    "state": {
+        "global": {
+            "num_byte_slices": 0,
+            "num_uints": 0
+        },
+        "local": {
+            "num_byte_slices": 0,
+            "num_uints": 0
+        }
+    },
+    "schema": {
+        "global": {
+            "declared": {},
+            "reserved": {}
+        },
+        "local": {
+            "declared": {},
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "Sender Funds Contract with Beaker",
+        "methods": [
+            {
+                "name": "createFundsInfo",
+                "args": [
+                    {
+                        "type": "pay",
+                        "name": "pay"
+                    },
+                    {
+                        "type": "string",
+                        "name": "propertyNumber"
+                    },
+                    {
+                        "type": "address",
+                        "name": "Receiver"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "startDate"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "endDate"
+                    },
+                    {
+                        "type": "bool",
+                        "name": "haveExpectedSalesPrice"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "expectedSalesPrice"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "readItem",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "item_name"
+                    }
+                ],
+                "returns": {
+                    "type": "(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool)"
+                }
+            },
+            {
+                "name": "WithdrawFunds",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "item_name"
+                    }
+                ],
+                "returns": {
+                    "type": "(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool)"
+                }
+            }
+        ],
+        "networks": {}
+    },
+    "bare_call_config": {
+        "no_op": "CREATE"
+    }
+}

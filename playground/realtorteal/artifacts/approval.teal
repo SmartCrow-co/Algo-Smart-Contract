@@ -1,0 +1,289 @@
+#pragma version 8
+intcblock 0 1
+bytecblock 0x 0x00 0x151f7c75
+txn NumAppArgs
+intc_0 // 0
+==
+bnz main_l8
+txna ApplicationArgs 0
+pushbytes 0xbb5e4981 // "createFundsInfo(pay,string,address,uint64,uint64,bool,uint64)void"
+==
+bnz main_l7
+txna ApplicationArgs 0
+pushbytes 0x78239897 // "readItem(string)(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool)"
+==
+bnz main_l6
+txna ApplicationArgs 0
+pushbytes 0x1b2adbb2 // "WithdrawFunds(string)(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool)"
+==
+bnz main_l5
+err
+main_l5:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub WithdrawFundscaster_5
+intc_1 // 1
+return
+main_l6:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub readItemcaster_4
+intc_1 // 1
+return
+main_l7:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub createFundsInfocaster_3
+intc_1 // 1
+return
+main_l8:
+txn OnCompletion
+intc_0 // NoOp
+==
+bnz main_l10
+err
+main_l10:
+txn ApplicationID
+intc_0 // 0
+==
+assert
+intc_1 // 1
+return
+
+// createFundsInfo
+createFundsInfo_0:
+proto 7 0
+intc_0 // 0
+dup
+bytec_0 // ""
+intc_0 // 0
+bytec_0 // ""
+intc_0 // 0
+dup
+bytec_0 // ""
+dup
+intc_0 // 0
+!
+!
+frame_bury 0
+intc_0 // 0
+!
+!
+frame_bury 1
+txn Sender
+frame_bury 2
+frame_dig 2
+len
+pushint 32 // 32
+==
+assert
+frame_dig -7
+gtxns Amount
+frame_bury 3
+frame_dig -6
+frame_bury 8
+frame_dig 8
+frame_bury 7
+pushint 100 // 100
+frame_bury 5
+frame_dig 5
+itob
+extract 6 0
+frame_dig 2
+concat
+frame_dig -5
+concat
+frame_dig 3
+itob
+concat
+frame_dig -4
+itob
+concat
+frame_dig -3
+itob
+concat
+bytec_1 // 0x00
+intc_0 // 0
+frame_dig 0
+setbit
+intc_1 // 1
+frame_dig -2
+setbit
+concat
+frame_dig -1
+itob
+concat
+bytec_1 // 0x00
+intc_0 // 0
+frame_dig 1
+setbit
+concat
+frame_dig 7
+concat
+frame_bury 4
+frame_dig -6
+extract 2 0
+box_del
+pop
+frame_dig -6
+extract 2 0
+frame_dig 4
+box_put
+retsub
+
+// readItem
+readItem_1:
+proto 1 1
+bytec_0 // ""
+frame_dig -1
+extract 2 0
+box_get
+store 1
+store 0
+load 1
+assert
+load 0
+frame_bury 0
+retsub
+
+// WithdrawFunds
+WithdrawFunds_2:
+proto 1 1
+bytec_0 // ""
+dup
+intc_0 // 0
+bytec_0 // ""
+frame_dig -1
+extract 2 0
+box_get
+store 3
+store 2
+load 3
+assert
+load 2
+frame_bury 1
+frame_dig 1
+pushint 66 // 66
+extract_uint64
+frame_bury 2
+frame_dig 1
+extract 34 32
+frame_bury 3
+frame_dig 3
+txn Sender
+==
+assert
+itxn_begin
+intc_1 // pay
+itxn_field TypeEnum
+txn Sender
+itxn_field Receiver
+frame_dig 2
+itxn_field Amount
+itxn_submit
+frame_dig -1
+extract 2 0
+box_get
+store 5
+store 4
+load 5
+assert
+load 4
+frame_bury 0
+retsub
+
+// createFundsInfo_caster
+createFundsInfocaster_3:
+proto 0 0
+intc_0 // 0
+bytec_0 // ""
+dup
+intc_0 // 0
+dupn 3
+txna ApplicationArgs 1
+frame_bury 1
+txna ApplicationArgs 2
+frame_bury 2
+txna ApplicationArgs 3
+btoi
+frame_bury 3
+txna ApplicationArgs 4
+btoi
+frame_bury 4
+txna ApplicationArgs 5
+intc_0 // 0
+pushint 8 // 8
+*
+getbit
+frame_bury 5
+txna ApplicationArgs 6
+btoi
+frame_bury 6
+txn GroupIndex
+intc_1 // 1
+-
+frame_bury 0
+frame_dig 0
+gtxns TypeEnum
+intc_1 // pay
+==
+assert
+frame_dig 0
+frame_dig 1
+frame_dig 2
+frame_dig 3
+frame_dig 4
+frame_dig 5
+frame_dig 6
+callsub createFundsInfo_0
+retsub
+
+// readItem_caster
+readItemcaster_4:
+proto 0 0
+bytec_0 // ""
+dup
+txna ApplicationArgs 1
+frame_bury 1
+frame_dig 1
+callsub readItem_1
+frame_bury 0
+bytec_2 // 0x151f7c75
+frame_dig 0
+concat
+log
+retsub
+
+// WithdrawFunds_caster
+WithdrawFundscaster_5:
+proto 0 0
+bytec_0 // ""
+dup
+txna ApplicationArgs 1
+frame_bury 1
+frame_dig 1
+callsub WithdrawFunds_2
+frame_bury 0
+bytec_2 // 0x151f7c75
+frame_dig 0
+concat
+log
+retsub
