@@ -1,3 +1,6 @@
+# Testnet address
+`EP4A4YJ4E3TC2TK2FDCXCJPULT3H7DLDPJMH6APWAJWOL4L2NYTYVJMRME`
+
 # Playground 
 
 This project has been generated using AlgoKit to help you quickly get started with a basic playground for experimenting with Beaker smart contracts against a [LocalNet](https://github.com/algorandfoundation/algokit-cli/blob/main/docs/features/localnet.md) network.

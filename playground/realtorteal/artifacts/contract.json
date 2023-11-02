@@ -38,6 +38,26 @@
             }
         },
         {
+            "name": "updateSenderFundsItem",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "item_name"
+                },
+                {
+                    "type": "bool",
+                    "name": "propertySold"
+                },
+                {
+                    "type": "bool",
+                    "name": "meetSalesPrice"
+                }
+            ],
+            "returns": {
+                "type": "(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool,bool,bool)"
+            }
+        },
+        {
             "name": "readItem",
             "args": [
                 {
@@ -46,11 +66,11 @@
                 }
             ],
             "returns": {
-                "type": "(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool)"
+                "type": "(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool,bool,bool)"
             }
         },
         {
-            "name": "WithdrawFunds",
+            "name": "WithdrawFundsForReceiver",
             "args": [
                 {
                     "type": "string",
@@ -58,7 +78,19 @@
                 }
             ],
             "returns": {
-                "type": "(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool)"
+                "type": "(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool,bool,bool)"
+            }
+        },
+        {
+            "name": "WithdrawFundsForSender",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "item_name"
+                }
+            ],
+            "returns": {
+                "type": "(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool,bool,bool)"
             }
         }
     ],
