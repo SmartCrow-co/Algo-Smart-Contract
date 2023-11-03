@@ -22,7 +22,7 @@ class SenderFundsContract(abi.NamedTuple):
     propertySold: abi.Field[abi.Bool]
     haveExpectedSalesPrice: abi.Field[abi.Bool]
     expectedSalesPrice: abi.Field[abi.Uint64]
-    meetSalesPrice: abi.Field[abi.Bool]
+    meetSalesCondition: abi.Field[abi.Bool]
     fundsWithdrawn: abi.Field[abi.Bool]
     postDeadlineCheck: abi.Field[abi.Bool] # For Sender to withdraw 
 
@@ -39,7 +39,7 @@ app = Application("Sender Funds Contract with Beaker", state=SenderFundsStates()
 @app.external
 def createFundsInfo(pay: abi.PaymentTransaction, propertyNumber: abi.String, Receiver: abi.Address, startDate: abi.Uint64, endDate: abi.Uint64, haveExpectedSalesPrice: abi.Bool, expectedSalesPrice: abi.Uint64) -> Expr:
     propertySold =  abi.Bool()
-    meetSalesPrice  = abi.Bool()
+    meetSalesCondition  = abi.Bool()
     fundsWithdrawn  = abi.Bool()
     postDeadlineCheck = abi.Bool()
     Sender = abi.Address()
@@ -48,12 +48,12 @@ def createFundsInfo(pay: abi.PaymentTransaction, propertyNumber: abi.String, Rec
 
     return Seq(
         propertySold.set(Int(0)),
-        meetSalesPrice.set(Int(0)),
+        meetSalesCondition.set(Int(0)),
         fundsWithdrawn.set(Int(0)),
         postDeadlineCheck.set(Int(0)),
         Sender.set(Txn.sender()),
         bonusAmount.set(pay.get().amount()),
-        sender_funds_tuple.set(propertyNumber, Sender,Receiver, bonusAmount, startDate, endDate, propertySold, haveExpectedSalesPrice, expectedSalesPrice, meetSalesPrice, fundsWithdrawn, postDeadlineCheck),
+        sender_funds_tuple.set(propertyNumber, Sender,Receiver, bonusAmount, startDate, endDate, propertySold, haveExpectedSalesPrice, expectedSalesPrice, meetSalesCondition, fundsWithdrawn, postDeadlineCheck),
         app.state.sender_funds_item[propertyNumber.get()].set(sender_funds_tuple),
     )
 
@@ -64,7 +64,7 @@ def createFundsInfo(pay: abi.PaymentTransaction, propertyNumber: abi.String, Rec
 # 2. Sender can only receive after time passes. 
 ### Update SenderFunds Item ###
 @app.external
-def updateSenderFundsItem(item_name: abi.String,propertySold: abi.Bool, meetSalesPrice: abi.Bool,*, output: SenderFundsContract) -> Expr:
+def updateSenderFundsItem(item_name: abi.String,propertySold: abi.Bool, meetSalesCondition: abi.Bool, postDeadlineCheck: abi.Bool,*, output: SenderFundsContract) -> Expr:
     existing_sender_funds_item = SenderFundsContract()
     propertyNumber = abi.String()
     Sender = abi.Address()
@@ -75,7 +75,6 @@ def updateSenderFundsItem(item_name: abi.String,propertySold: abi.Bool, meetSale
     haveExpectedSalesPrice = abi.Bool()
     expectedSalesPrice = abi.Uint64()
     fundsWithdrawn = abi.Bool()
-    postDeadlineCheck = abi.Bool()
 
     
 
@@ -91,9 +90,7 @@ def updateSenderFundsItem(item_name: abi.String,propertySold: abi.Bool, meetSale
         haveExpectedSalesPrice.set(existing_sender_funds_item.haveExpectedSalesPrice),
         expectedSalesPrice.set(existing_sender_funds_item.expectedSalesPrice),
         fundsWithdrawn.set(existing_sender_funds_item.fundsWithdrawn),
-        # Perform a post deadline check
-
-        existing_sender_funds_item.set(propertyNumber, Sender,Receiver, bonusAmount, startDate, endDate, propertySold, haveExpectedSalesPrice, expectedSalesPrice, meetSalesPrice, fundsWithdrawn, postDeadlineCheck),
+        existing_sender_funds_item.set(propertyNumber, Sender,Receiver, bonusAmount, startDate, endDate, propertySold, haveExpectedSalesPrice, expectedSalesPrice, meetSalesCondition, fundsWithdrawn, postDeadlineCheck),
         app.state.sender_funds_item[item_name.get()].set(existing_sender_funds_item),
         app.state.sender_funds_item[item_name.get()].store_into(output),
     )
@@ -118,7 +115,7 @@ def WithdrawFundsForReceiver(item_name: abi.String, *, output: SenderFundsContra
     Receiver = abi.Address()
     false_bool_fundsWithdrawn =  abi.Bool()
     false_bool_propertySold =  abi.Bool()
-    false_bool_meetSalesPrice =  abi.Bool()
+    false_bool_meetSalesCondition =  abi.Bool()
     # Other variables
     propertyNumber = abi.String()
     Sender = abi.Address()
@@ -128,7 +125,7 @@ def WithdrawFundsForReceiver(item_name: abi.String, *, output: SenderFundsContra
     expectedSalesPrice = abi.Uint64()
     fundsWithdrawn = abi.Bool()
     propertySold= abi.Bool()
-    meetSalesPrice= abi.Bool()
+    meetSalesCondition= abi.Bool()
     postDeadlineCheck= abi.Bool()
 
     return Seq(
@@ -143,14 +140,12 @@ def WithdrawFundsForReceiver(item_name: abi.String, *, output: SenderFundsContra
         # 3. Funds shouldn't be withdrawn already
         false_bool_fundsWithdrawn.set(existing_sender_funds_item.fundsWithdrawn),
         Assert(false_bool_fundsWithdrawn.get() == Int(0)),
-        # 4. Check if sales is done within time
-
-        # 5. Check if property is sold  
+        # 4. Check if property is sold  
         false_bool_propertySold.set(existing_sender_funds_item.propertySold),
         Assert(false_bool_propertySold.get() != Int(0)),
-        # 6. Check if expected sales price is met
-        false_bool_meetSalesPrice.set(existing_sender_funds_item.meetSalesPrice),
-        Assert(false_bool_meetSalesPrice.get() != Int(0)),
+        # 5. Check if expected sales price is met
+        false_bool_meetSalesCondition.set(existing_sender_funds_item.meetSalesCondition),
+        Assert(false_bool_meetSalesCondition.get() != Int(0)),
 
         
         ## Actions on this function
@@ -171,9 +166,9 @@ def WithdrawFundsForReceiver(item_name: abi.String, *, output: SenderFundsContra
         expectedSalesPrice.set(existing_sender_funds_item.expectedSalesPrice),
         fundsWithdrawn.set(Int(1)), # To set funds withdraw status
         propertySold.set(existing_sender_funds_item.propertySold),
-        meetSalesPrice.set(existing_sender_funds_item.meetSalesPrice),
+        meetSalesCondition.set(existing_sender_funds_item.meetSalesCondition),
         postDeadlineCheck.set(existing_sender_funds_item.postDeadlineCheck),
-        existing_sender_funds_item.set(propertyNumber, Sender,Receiver, bonusAmount, startDate, endDate, propertySold, haveExpectedSalesPrice, expectedSalesPrice, meetSalesPrice, fundsWithdrawn, postDeadlineCheck),
+        existing_sender_funds_item.set(propertyNumber, Sender,Receiver, bonusAmount, startDate, endDate, propertySold, haveExpectedSalesPrice, expectedSalesPrice, meetSalesCondition, fundsWithdrawn, postDeadlineCheck),
         
         # 3. Show the whole Bonus Info Box as output
         app.state.sender_funds_item[item_name.get()].store_into(output),  
@@ -190,6 +185,8 @@ def WithdrawFundsForSender(item_name: abi.String, *, output: SenderFundsContract
     Sender = abi.Address()
     false_bool_fundsWithdrawn =  abi.Bool()
     false_bool_postDeadlineCheck =  abi.Bool()
+    false_bool_meetSalesCondition =  abi.Bool()
+
 
     # Other variables
     propertyNumber = abi.String()
@@ -200,7 +197,7 @@ def WithdrawFundsForSender(item_name: abi.String, *, output: SenderFundsContract
     expectedSalesPrice = abi.Uint64()
     fundsWithdrawn = abi.Bool()
     propertySold= abi.Bool() 
-    meetSalesPrice= abi.Bool()
+    meetSalesCondition= abi.Bool()
     postDeadlineCheck= abi.Bool()
 
     return Seq(
@@ -215,11 +212,13 @@ def WithdrawFundsForSender(item_name: abi.String, *, output: SenderFundsContract
         # 3. Funds shouldn't be withdrawn already
         false_bool_fundsWithdrawn.set(existing_sender_funds_item.fundsWithdrawn),
         Assert(false_bool_fundsWithdrawn.get() == Int(0)),
-        # 4. Check if sales time has exceeded
+        # 4. Check if API was checked post sales time to allow withdraw
+        false_bool_postDeadlineCheck.set(existing_sender_funds_item.postDeadlineCheck),
+        Assert(false_bool_postDeadlineCheck.get() != Int(0)),
+        # 5. Check if expected sales condition is not met
+        false_bool_meetSalesCondition.set(existing_sender_funds_item.meetSalesCondition),
+        Assert(false_bool_meetSalesCondition.get() == Int(0)),
 
-        # 5. Check if API was checked post sales time to allow withdraw
-        # false_bool_postDeadlineCheck.set(existing_sender_funds_item.postDeadlineCheck),
-        # Assert(false_bool_postDeadlineCheck.get() != Int(0)),
 
 
         ## Actions on this function
@@ -240,9 +239,9 @@ def WithdrawFundsForSender(item_name: abi.String, *, output: SenderFundsContract
         expectedSalesPrice.set(existing_sender_funds_item.expectedSalesPrice),
         fundsWithdrawn.set(Int(1)), # To set funds withdraw status
         propertySold.set(existing_sender_funds_item.propertySold),
-        meetSalesPrice.set(existing_sender_funds_item.meetSalesPrice),
+        meetSalesCondition.set(existing_sender_funds_item.meetSalesCondition),
         postDeadlineCheck.set(existing_sender_funds_item.postDeadlineCheck),
-        existing_sender_funds_item.set(propertyNumber, Sender,Receiver, bonusAmount, startDate, endDate, propertySold, haveExpectedSalesPrice, expectedSalesPrice, meetSalesPrice, fundsWithdrawn, postDeadlineCheck),
+        existing_sender_funds_item.set(propertyNumber, Sender,Receiver, bonusAmount, startDate, endDate, propertySold, haveExpectedSalesPrice, expectedSalesPrice, meetSalesCondition, fundsWithdrawn, postDeadlineCheck),
         # 3. Show the whole Bonus Info Box as output
         app.state.sender_funds_item[item_name.get()].store_into(output),  
     )

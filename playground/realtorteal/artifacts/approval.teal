@@ -1,5 +1,5 @@
 #pragma version 8
-intcblock 0 1 100 2 721 793 720 792 794
+intcblock 0 1 100 2 792 721 793 720 794
 bytecblock 0x 0x00 0x151f7c75
 txn NumAppArgs
 intc_0 // 0
@@ -10,7 +10,7 @@ pushbytes 0xbb5e4981 // "createFundsInfo(pay,string,address,uint64,uint64,bool,u
 ==
 bnz main_l11
 txna ApplicationArgs 0
-pushbytes 0x7c673965 // "updateSenderFundsItem(string,bool,bool)(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool,bool,bool)"
+pushbytes 0x7332d6ea // "updateSenderFundsItem(string,bool,bool,bool)(string,address,address,uint64,uint64,uint64,bool,bool,uint64,bool,bool,bool)"
 ==
 bnz main_l10
 txna ApplicationArgs 0
@@ -197,18 +197,18 @@ retsub
 
 // updateSenderFundsItem
 updateSenderFundsItem_1:
-proto 3 1
+proto 4 1
 bytec_0 // ""
 dupn 4
 intc_0 // 0
-dupn 8
+dupn 7
 bytec_0 // ""
 dup
 global CreatorAddress
 txn Sender
 ==
 assert
-frame_dig -3
+frame_dig -4
 extract 2 0
 box_get
 store 1
@@ -244,7 +244,7 @@ pushint 82 // 82
 extract_uint64
 frame_bury 7
 frame_dig 1
-intc 4 // 721
+intc 5 // 721
 getbit
 frame_bury 8
 frame_dig 1
@@ -252,16 +252,16 @@ pushint 91 // 91
 extract_uint64
 frame_bury 9
 frame_dig 1
-intc 5 // 793
+intc 6 // 793
 getbit
 frame_bury 10
 frame_dig 2
-frame_bury 15
-frame_dig 15
 frame_bury 14
+frame_dig 14
+frame_bury 13
 intc_2 // 100
-frame_bury 12
-frame_dig 12
+frame_bury 11
+frame_dig 11
 itob
 extract 6 0
 frame_dig 3
@@ -279,7 +279,7 @@ itob
 concat
 bytec_1 // 0x00
 intc_0 // 0
-frame_dig -2
+frame_dig -3
 setbit
 intc_1 // 1
 frame_dig 8
@@ -290,27 +290,27 @@ itob
 concat
 bytec_1 // 0x00
 intc_0 // 0
-frame_dig -1
+frame_dig -2
 setbit
 intc_1 // 1
 frame_dig 10
 setbit
 intc_3 // 2
-frame_dig 11
+frame_dig -1
 setbit
 concat
-frame_dig 14
+frame_dig 13
 concat
 frame_bury 1
-frame_dig -3
+frame_dig -4
 extract 2 0
 box_del
 pop
-frame_dig -3
+frame_dig -4
 extract 2 0
 frame_dig 1
 box_put
-frame_dig -3
+frame_dig -4
 extract 2 0
 box_get
 store 3
@@ -372,7 +372,7 @@ pushint 66 // 66
 extract_uint64
 frame_bury 2
 frame_dig 1
-intc 5 // 793
+intc 6 // 793
 getbit
 frame_bury 4
 frame_dig 4
@@ -380,7 +380,7 @@ intc_0 // 0
 ==
 assert
 frame_dig 1
-intc 6 // 720
+intc 7 // 720
 getbit
 frame_bury 5
 frame_dig 5
@@ -388,7 +388,7 @@ intc_0 // 0
 !=
 assert
 frame_dig 1
-intc 7 // 792
+intc 4 // 792
 getbit
 frame_bury 6
 frame_dig 6
@@ -423,7 +423,7 @@ pushint 82 // 82
 extract_uint64
 frame_bury 10
 frame_dig 1
-intc 4 // 721
+intc 5 // 721
 getbit
 frame_bury 11
 frame_dig 1
@@ -435,11 +435,11 @@ intc_1 // 1
 !
 frame_bury 13
 frame_dig 1
-intc 6 // 720
+intc 7 // 720
 getbit
 frame_bury 14
 frame_dig 1
-intc 7 // 792
+intc 4 // 792
 getbit
 frame_bury 15
 frame_dig 1
@@ -512,7 +512,7 @@ dup
 intc_0 // 0
 bytec_0 // ""
 intc_0 // 0
-dup
+dupn 2
 bytec_0 // ""
 dup
 intc_0 // 0
@@ -540,10 +540,26 @@ pushint 66 // 66
 extract_uint64
 frame_bury 2
 frame_dig 1
-intc 5 // 793
+intc 6 // 793
 getbit
 frame_bury 4
 frame_dig 4
+intc_0 // 0
+==
+assert
+frame_dig 1
+intc 8 // 794
+getbit
+frame_bury 5
+frame_dig 5
+intc_0 // 0
+!=
+assert
+frame_dig 1
+intc 4 // 792
+getbit
+frame_bury 6
+frame_dig 6
 intc_0 // 0
 ==
 assert
@@ -562,73 +578,62 @@ extract_uint16
 dig 1
 len
 substring3
-frame_bury 6
+frame_bury 7
 frame_dig 1
 extract 34 32
-frame_bury 7
+frame_bury 8
 frame_dig 1
 pushint 74 // 74
 extract_uint64
-frame_bury 8
+frame_bury 9
 frame_dig 1
 pushint 82 // 82
 extract_uint64
-frame_bury 9
-frame_dig 1
-intc 4 // 721
-getbit
 frame_bury 10
+frame_dig 1
+intc 5 // 721
+getbit
+frame_bury 11
 frame_dig 1
 pushint 91 // 91
 extract_uint64
-frame_bury 11
+frame_bury 12
 intc_1 // 1
 !
 !
-frame_bury 12
-frame_dig 1
-intc 6 // 720
-getbit
 frame_bury 13
 frame_dig 1
-intc 7 // 792
+intc 7 // 720
 getbit
 frame_bury 14
 frame_dig 1
-intc 8 // 794
+intc 4 // 792
 getbit
 frame_bury 15
-frame_dig 6
-frame_bury 19
-frame_dig 19
-frame_bury 18
-intc_2 // 100
+frame_dig 1
+intc 8 // 794
+getbit
 frame_bury 16
-frame_dig 16
+frame_dig 7
+frame_bury 20
+frame_dig 20
+frame_bury 19
+intc_2 // 100
+frame_bury 17
+frame_dig 17
 itob
 extract 6 0
 frame_dig 3
 concat
-frame_dig 7
+frame_dig 8
 concat
 frame_dig 2
-itob
-concat
-frame_dig 8
 itob
 concat
 frame_dig 9
 itob
 concat
-bytec_1 // 0x00
-intc_0 // 0
-frame_dig 13
-setbit
-intc_1 // 1
 frame_dig 10
-setbit
-concat
-frame_dig 11
 itob
 concat
 bytec_1 // 0x00
@@ -636,13 +641,24 @@ intc_0 // 0
 frame_dig 14
 setbit
 intc_1 // 1
-frame_dig 12
-setbit
-intc_3 // 2
-frame_dig 15
+frame_dig 11
 setbit
 concat
-frame_dig 18
+frame_dig 12
+itob
+concat
+bytec_1 // 0x00
+intc_0 // 0
+frame_dig 15
+setbit
+intc_1 // 1
+frame_dig 13
+setbit
+intc_3 // 2
+frame_dig 16
+setbit
+concat
+frame_dig 19
 concat
 frame_bury 1
 frame_dig -1
@@ -708,7 +724,7 @@ proto 0 0
 bytec_0 // ""
 dup
 intc_0 // 0
-dup
+dupn 2
 txna ApplicationArgs 1
 frame_bury 1
 txna ApplicationArgs 2
@@ -723,9 +739,16 @@ pushint 8 // 8
 *
 getbit
 frame_bury 3
+txna ApplicationArgs 4
+intc_0 // 0
+pushint 8 // 8
+*
+getbit
+frame_bury 4
 frame_dig 1
 frame_dig 2
 frame_dig 3
+frame_dig 4
 callsub updateSenderFundsItem_1
 frame_bury 0
 bytec_2 // 0x151f7c75

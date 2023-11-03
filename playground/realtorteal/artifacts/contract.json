@@ -50,7 +50,11 @@
                 },
                 {
                     "type": "bool",
-                    "name": "meetSalesPrice"
+                    "name": "meetSalesCondition"
+                },
+                {
+                    "type": "bool",
+                    "name": "postDeadlineCheck"
                 }
             ],
             "returns": {
