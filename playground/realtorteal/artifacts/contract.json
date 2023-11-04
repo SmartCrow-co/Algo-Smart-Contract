@@ -74,6 +74,18 @@
             }
         },
         {
+            "name": "readFundsWithdrawnStatus",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "item_name"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            }
+        },
+        {
             "name": "WithdrawFundsForReceiver",
             "args": [
                 {

@@ -103,6 +103,14 @@ def readItem(item_name: abi.String, *, output: SenderFundsContract) -> Expr:
         app.state.sender_funds_item[item_name.get()].store_into(output),  
     )
 
+### Read Funds Withdrawl status ###
+@app.external
+def readFundsWithdrawnStatus(item_name: abi.String, *, output: abi.Bool) -> Expr:
+    existing_sender_funds_item = SenderFundsContract()
+    return Seq(
+        existing_sender_funds_item.decode(app.state.sender_funds_item[item_name.get()].get()),
+        output.set(existing_sender_funds_item.fundsWithdrawn) 
+    )
 
 ### Withdraw Funds For Receiver###
 # Add funds received boolean
